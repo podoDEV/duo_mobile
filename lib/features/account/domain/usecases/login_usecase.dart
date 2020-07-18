@@ -1,12 +1,12 @@
-import 'package:Duo/features/account/domain/entities/auth_provider.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../repositories/user_repository.dart';
+import '../entities/auth_provider.dart';
+import '../repositories/auth_repository.dart';
 
 class LoginUseCase implements UseCase<void, LoginParams> {
-  final UserRepository repository;
+  final AuthRepository repository;
 
   LoginUseCase(this.repository);
 

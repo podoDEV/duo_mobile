@@ -6,7 +6,7 @@ class LoginRequestModel extends RequestMappable {
   final String authId;
   final AuthProvider provider;
 
-  LoginRequestModel(this.authId, this.provider);
+  LoginRequestModel({this.authId, this.provider});
 
   @override
   Map<String, dynamic> toJson() => {
