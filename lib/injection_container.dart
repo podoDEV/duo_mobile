@@ -1,3 +1,4 @@
+import 'package:Duo/features/account/domain/usecases/update_member_usecase.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
@@ -29,6 +30,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => AuthorizedUseCase(sl()));
   sl.registerLazySingleton(() => GetMemberUseCase(sl()));
   sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateMemberUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<AuthRepository>(
