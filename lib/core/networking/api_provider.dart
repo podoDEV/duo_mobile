@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart';
 
 import '../error/exceptions.dart';
-import '../logger.dart';
+import '../util/logger.dart';
 import 'api_exception.dart';
 import 'http_request.dart';
 import 'plugin_type.dart';
@@ -13,11 +13,11 @@ abstract class ApiProviderProtocol {
   Future<Map<String, dynamic>> send(HttpRequestProtocol req);
 }
 
-class EGApiProvider implements ApiProviderProtocol {
+class DuoApiProvider implements ApiProviderProtocol {
   final Client client;
   List<PluginType> _plugins = [];
 
-  EGApiProvider(this.client, [this._plugins]);
+  DuoApiProvider(this.client, [this._plugins]);
 
   Future<Map<String, dynamic>> send(HttpRequestProtocol req) async {
     final request = HttpRequest(req, _plugins);
