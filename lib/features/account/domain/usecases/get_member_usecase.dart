@@ -5,19 +5,19 @@ import '../../../../core/usecases/usecase.dart';
 import '../entities/member.dart';
 import '../repositories/user_repository.dart';
 
-class GetMemberUseCase implements UseCase<Member, GetMemberParams> {
+class GetMemberUseCase implements UseCase<Member, MemberGetParams> {
   final UserRepository repository;
 
   GetMemberUseCase(this.repository);
 
   @override
-  Future<Either<Failure, Member>> call(GetMemberParams params) async {
+  Future<Either<Failure, Member>> call(MemberGetParams params) async {
     return await repository.memberBy(id: params.memberId);
   }
 }
 
-class GetMemberParams {
+class MemberGetParams {
   final String memberId;
 
-  GetMemberParams(this.memberId);
+  MemberGetParams(this.memberId);
 }

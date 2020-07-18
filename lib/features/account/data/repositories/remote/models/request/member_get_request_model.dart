@@ -1,4 +1,4 @@
-import 'package:Duo/core/networking/mappable.dart';
+import '../../../../../../../core/networking/mappable.dart';
 
 class MemberGetRequestModel extends RequestMappable {
   final String memberId;

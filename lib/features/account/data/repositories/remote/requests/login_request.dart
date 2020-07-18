@@ -1,3 +1,4 @@
+import '../../../../../../core/constants.dart';
 import '../../../../../../core/models/base_request.dart';
 import '../../../../../../core/networking/content_encoding.dart';
 import '../../../../../../core/networking/http_method.dart';
@@ -9,7 +10,7 @@ class LoginRequest extends BaseRequest {
   LoginRequest(this.requestModel);
 
   @override
-  String get baseUrl => 'http://183.111.252.131:8080/api';
+  String get baseUrl => Constants.baseUrl;
 
   @override
   ContentEncoding get contentEncoding => ContentEncoding.json;

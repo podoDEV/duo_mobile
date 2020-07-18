@@ -6,6 +6,7 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/networking/network_info.dart';
 import '../../domain/entities/member.dart';
 import '../../domain/repositories/user_repository.dart';
+import '../../domain/usecases/update_member_usecase.dart';
 import '../datasources/user_remote_data_source.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -35,6 +36,20 @@ class UserRepositoryImpl implements UserRepository {
     try {
       verifyForOnline();
       final member = await remoteDataSource.getMemberBy(id);
+      return Right(member);
+    } on NetworkException {
+      return Left(NetworkFailure());
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Member>> updateMember(
+      {MemberUpdateParams params}) async {
+    try {
+      verifyForOnline();
+      final member = await remoteDataSource.updateMember(params);
       return Right(member);
     } on NetworkException {
       return Left(NetworkFailure());

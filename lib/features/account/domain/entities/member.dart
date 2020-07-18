@@ -1,5 +1,6 @@
 class Member {
   String id;
+  String nickname;
 
   Member({this.id});
 
