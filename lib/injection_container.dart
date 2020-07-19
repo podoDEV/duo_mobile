@@ -1,4 +1,6 @@
 import 'package:Duo/features/account/domain/usecases/update_member_usecase.dart';
+import 'package:Duo/features/game/domain/usecases/get_game_categories_usecase.dart';
+import 'package:Duo/features/game/domain/usecases/get_rooms_usecase.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
@@ -24,6 +26,12 @@ import 'features/account/domain/usecases/login_usecase.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  //! Features - Game
+
+  // Use cases
+  sl.registerLazySingleton(() => GetGameCategoriesUseCase(sl()));
+  sl.registerLazySingleton(() => GetRoomsUseCase(sl()));
+
   //! Features - Account
 
   // Use cases
