@@ -18,4 +18,12 @@ class Room {
       this.owner,
       this.title,
       this.attendeeList});
+
+  factory Room.fromMap(Map<String, dynamic> map) => new Room(
+      id: map['id'],
+      category: map['category'],
+      createdAt: map['createAt'],
+      meetAt: map['meetAt'],
+      owner: map['owner'],
+      title: map['title']);
 }

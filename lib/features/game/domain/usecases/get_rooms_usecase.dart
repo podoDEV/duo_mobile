@@ -13,14 +13,13 @@ class GetRoomsUseCase implements UseCase<List<Room>, RoomsGetParams> {
 
   @override
   Future<Either<Failure, List<Room>>> call(RoomsGetParams params) async {
-    return await repository.getRooms(params);
+    return await repository.rooms(params);
   }
 }
 
 class RoomsGetParams {
   GameCategory category;
   int pageNumber;
-  int pageSize = 30;
 
   RoomsGetParams({this.category, this.pageNumber});
 }

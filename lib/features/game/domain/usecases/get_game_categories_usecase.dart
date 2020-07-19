@@ -13,6 +13,6 @@ class GetGameCategoriesUseCase
 
   @override
   Future<Either<Failure, List<GameCategory>>> call(NoParams params) async {
-    return await repository.getCategories();
+    return await repository.categories();
   }
 }

@@ -1,6 +1,3 @@
-import 'package:Duo/features/account/domain/usecases/update_member_usecase.dart';
-import 'package:Duo/features/game/domain/usecases/get_game_categories_usecase.dart';
-import 'package:Duo/features/game/domain/usecases/get_rooms_usecase.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
@@ -22,6 +19,15 @@ import 'features/account/domain/repositories/user_repository.dart';
 import 'features/account/domain/usecases/authorized_usecase.dart';
 import 'features/account/domain/usecases/get_member_usecase.dart';
 import 'features/account/domain/usecases/login_usecase.dart';
+import 'features/account/domain/usecases/update_member_usecase.dart';
+import 'features/game/data/datasources/game_remote_data_source.dart';
+import 'features/game/data/repositories/game_repository_impl.dart';
+import 'features/game/data/repositories/remote/game_remote_repository.dart';
+import 'features/game/domain/repositories/game_repository.dart';
+import 'features/game/domain/usecases/create_room_usecase.dart';
+import 'features/game/domain/usecases/get_game_categories_usecase.dart';
+import 'features/game/domain/usecases/get_room_usecase.dart';
+import 'features/game/domain/usecases/get_rooms_usecase.dart';
 
 final sl = GetIt.instance;
 
@@ -31,6 +37,16 @@ Future<void> init() async {
   // Use cases
   sl.registerLazySingleton(() => GetGameCategoriesUseCase(sl()));
   sl.registerLazySingleton(() => GetRoomsUseCase(sl()));
+  sl.registerLazySingleton(() => GetRoomUseCase(sl()));
+  sl.registerLazySingleton(() => CreateRoomUseCase(sl()));
+
+  // Repository
+  sl.registerLazySingleton<GameRepository>(
+      () => GameRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+
+  // Data sources
+  sl.registerLazySingleton<GameRemoteDataSource>(
+      () => GameRemoteRepository(sl()));
 
   //! Features - Account
 
@@ -56,9 +72,11 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteRepository(DuoApiProvider(sl())));
   sl.registerLazySingleton<UserRemoteDataSource>(
-      () => UserRemoteRepository(DuoApiProvider(sl(), [sl()])));
+      () => UserRemoteRepository(sl()));
 
   //! Core
+  sl.registerLazySingleton<ApiProviderProtocol>(
+      () => DuoApiProvider(sl(), [sl()]));
   sl.registerLazySingleton<PluginType>(() => AuthPlugin(sl()));
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 

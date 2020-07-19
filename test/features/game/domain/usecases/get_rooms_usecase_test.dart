@@ -26,7 +26,7 @@ void main() {
       final params =
           RoomsGetParams(category: GameCategory.overwatch, pageNumber: 0);
       final expected = rooms;
-      when(mockGameRepository.getRooms(params))
+      when(mockGameRepository.rooms(params))
           .thenAnswer((_) async => Right(rooms));
 
       // act
@@ -34,7 +34,7 @@ void main() {
 
       // assert
       expect(actual, Right(expected));
-      verify(mockGameRepository.getRooms(params));
+      verify(mockGameRepository.rooms(params));
       verifyNoMoreInteractions(mockGameRepository);
     },
   );
